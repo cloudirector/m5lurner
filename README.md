@@ -7,4 +7,5 @@
 
 ## Todo
 - [ ] Redesign
-- [ ] update [m5launcher](https://github.com/bmorcelli/Launcher) to use this link
+- [ ] Mirror [bmorcelli/M5Stack-json-fw](https://github.com/bmorcelli/M5Stack-json-fw)
+- [ ] Pull-request [m5launcher](https://github.com/bmorcelli/Launcher) to use this link
