@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en" style="--wm-toolbar-height: 67px;">
 
 <head>
@@ -9,83 +10,88 @@
 
 <body>
     <canvas id="backgroundCanvas"></canvas>
-    <div class="container">
-        <h1 align="center"> -= M5 Launcher Firmware Library =-</h1>
-        <div style="border-top: 5px dotted #00cc00;">
 
-        <div class="categoryFilter">
-            <select id="category-filter">
-                <option value="all">All</option>
-                <option value="cardputer">cardputer</option>
-                <option value="core">core</option>
-                <option value="stamps3">stamps3</option>
-                <option value="stickc">stickc</option>
-                <option value="core2 &amp; tough">core2 &amp; tough</option>
-                <option value="atom">atom</option>
-                <option value="atoms3">atoms3</option>
-                <option value="stamp">stamp</option>
-                <option value="airq">airq</option>
-                <option value="paper">paper</option>
-                <option value="cores3">cores3</option>
-                <option value="stickv &amp; unitv">stickv &amp; unitv</option>
-                <option value="coreink">coreink</option>
-                <option value="dinmeter">dinmeter</option>
-                <option value="dial">dial</option>
-                <option value="t-lite">t-lite</option>
-                <option value="timercam">timercam</option>
-                <option value="nanoc6">nanoc6</option>
-                <option value="station">station</option>
-                <option value="capsule">capsule</option>
-                <option value="third party">third party</option>
-            </select>
+    <div class="container">
+        <h1 align="center">-= M5 Launcher Firmware Library =-</h1>
+
+        <div style="border-top: 5px dotted #00cc00;">
+            <div class="categoryFilter">
+                <select id="category-filter">
+                    <option value="all">All</option>
+                    <option value="cardputer">cardputer</option>
+                    <option value="core">core</option>
+                    <option value="stamps3">stamps3</option>
+                    <option value="stickc">stickc</option>
+                    <option value="core2 &amp; tough">core2 &amp; tough</option>
+                    <option value="atom">atom</option>
+                    <option value="atoms3">atoms3</option>
+                    <option value="stamp">stamp</option>
+                    <option value="airq">airq</option>
+                    <option value="paper">paper</option>
+                    <option value="cores3">cores3</option>
+                    <option value="stickv &amp; unitv">stickv &amp; unitv</option>
+                    <option value="coreink">coreink</option>
+                    <option value="dinmeter">dinmeter</option>
+                    <option value="dial">dial</option>
+                    <option value="t-lite">t-lite</option>
+                    <option value="timercam">timercam</option>
+                    <option value="nanoc6">nanoc6</option>
+                    <option value="station">station</option>
+                    <option value="capsule">capsule</option>
+                    <option value="third party">third party</option>
+                </select>
+            </div>
         </div>
 
         <div id="firmware-list"></div>
-
-        <script src="script.js"></script>
     </div>
-</body>
 
-<script>
-    // https://codepen.io/wefiy/pen/WPpEwo
-    const backgroundCanvas = document.getElementById("backgroundCanvas");
-    const ctx = backgroundCanvas.getContext("2d");
+    <script src="script.js"></script>
 
-    backgroundCanvas.height = window.innerHeight;
-    backgroundCanvas.width = window.innerWidth;
+    <script>
+        // https://codepen.io/wefiy/pen/WPpEwo
+        const backgroundCanvas = document.getElementById("backgroundCanvas");
+        const ctx = backgroundCanvas.getContext("2d");
 
-    const chinese = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
-    const chars = chinese.split("");
-    const font_size = 14;
-    const columns = backgroundCanvas.width / font_size;
-    const drops = [];
-
-    for (let x = 0; x < columns; x++) {
-        drops[x] = 1;
-    }
-
-    function draw() {
-        ctx.fillStyle = "#202124";
-        ctx.fillRect(0, 0, backgroundCanvas.width, backgroundCanvas.height);
-        ctx.fillStyle = "#00dd00";
-        ctx.font = font_size + "px monospace";
-
-        for (let i = 0; i < drops.length; i++) {
-            const text = chars[Math.floor(Math.random() * chars.length)];
-            ctx.fillText(text, i * font_size, drops[i] * font_size);
-
-            if (drops[i] * font_size > backgroundCanvas.height && Math.random() > 0.975) {
-                drops[i] = 0;
-            }
-            drops[i]++;
-        }
-    }
-
-    setInterval(draw, 33);
-
-    window.addEventListener('resize', () => {
         backgroundCanvas.height = window.innerHeight;
         backgroundCanvas.width = window.innerWidth;
-    });
-</script>
+
+        const chinese = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+        const chars = chinese.split("");
+        const font_size = 14;
+        const columns = backgroundCanvas.width / font_size;
+        const drops = [];
+
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = "#202124";
+            ctx.fillRect(0, 0, backgroundCanvas.width, backgroundCanvas.height);
+
+            ctx.fillStyle = "#00dd00";
+            ctx.font = font_size + "px monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * font_size, drops[i] * font_size);
+
+                if (drops[i] * font_size > backgroundCanvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+
+        window.addEventListener('resize', () => {
+            backgroundCanvas.height = window.innerHeight;
+            backgroundCanvas.width = window.innerWidth;
+        });
+    </script>
+</body>
+
 </html>
