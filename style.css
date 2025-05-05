@@ -1,198 +1,199 @@
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    margin: 0;
-    padding: 5px;
-    color: #00dd00;
-    background-color: #202124;
+/* Utility */
+.newLine {
+  flex-basis: 100%;
+  height: 0;
 }
 
-#backgroundCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100vh;
-}
-
-.container {
-    position: relative;
-    z-index: 1;
-    max-width: 80%;
-    margin: 5px auto;
-    padding: 0 5px;
-    max-width: 80%;
-}
-
+/* Headings */
 h3 {
-    margin: 0;
-    padding: 10px 0;
-    border-bottom: 1px solid #00cc00;
+  margin: 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid #00cc00;
 }
 
-.download-button {
-    background-color: #303134;
-    color: #00dd00;
-    border: 2px solid;
-    padding: 4px 8px;
-    border-radius: 4px;
-    border-color: #00dd00;
-    cursor: pointer;
-    margin: 5px;
-    align-self: center;
-}
-
-.download-button:hover {
-    background-color: #292a2c;
-}
-
+/* Links */
 a {
-    color: #e0d204;
-    text-decoration: none;
+  color: #e0d204;
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-.newLine {
-    flex-basis: 100%;
-    height: 0;
-  }
+/* Global Styles */
+body {
+  margin: 0;
+  color: #00dd00;
+  padding: 0.5rem;
+  background-color: #202124;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
 
+/* Container */
+.container {
+  z-index: 1;
+  padding: 0 0.5rem;
+  position: relative;
+  max-width: 80%;
+  margin: 0.5rem auto;
+}
+
+/* Background Canvas */
+#backgroundCanvas {
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  position: fixed;
+  height: 100vh;
+}
+
+/* Category Filter */
 .categoryFilter {
-    display: flex;
-    justify-content: end;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-#firmware-list {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 20px;
+  margin: 2rem 0;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.firmware-card {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-    justify-content: center;
-    align-items: center;
-    word-break: break-word;
-    position: relative;
-    background-color: #202124bf;
-    border: 5px solid #00cc00;
-    border-style: dotted;
-    border-radius: 20px;
-}
-
-.firmware-card img {
-    height: 250px;
-    width: 250px;
-    border: 1px solid #00cc00;
-    border-radius: 20px;
-}
-
-.firmware-details {
-    border: 1px solid #00cc00;
-    border-radius: 20px;
-    margin-top: 20px;
-    flex: 1;
-    padding: 20px;
-    position: relative;
-    text-align: center;
-}
-
-.firmware-details h2 {
-    margin: 0;
-}
-
+/* Description */
 .description {
-    overflow: hidden;
-    display: -webkit-box;
-    text-align: justify;
-    -webkit-line-clamp: 10;
-    /* Limit to 10 lines */
-    -webkit-box-orient: vertical;
-    max-height: 15em;
-    /* Adjust according to line height */
-    position: relative;
+  max-height: 15em;
+  overflow: hidden;
+  text-align: justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
 }
 
 .description.expanded {
-    -webkit-line-clamp: unset;
-    /* Remove line clamp */
-    max-height: none;
-    /* Remove max height */
+  max-height: none;
+  -webkit-line-clamp: unset;
 }
 
-.overlay {
-    display: none;
-    padding: 10px;
-    border-radius: 10px;
-    /* Adjust according to line height */
-    background: rgba(000, 180, 000, 0.7);
-    text-align: center;
-    color: white;
-    text-decoration: bold;
-    cursor: pointer;
-    /* Vertically center the text */
-    transition: background 0.3s;
-    z-index: 1;
-    /* Ensure overlay is on top */
-}
-
-.overlay:hover {
-    background: rgba(000, 100, 000, 0.9);
-    text-decoration: underline;
-}
-
+/* Version Select */
 .version-select {
-    margin: 8px 0;
-    width: 10ch;
-    /* Approximate width for 10 characters */
+  width: 10ch;
+  margin: 0.8rem 0;
 }
 
 .version-select option {
-    max-width: 10ch;
-    /* Limit the display width */
+  max-width: 10ch;
 }
 
+/* Latest Version Text */
+.latestVersionText {
+  font-size: small;
+  font-weight: bold;
+  color: #00dd00;
+}
+
+/* Firmware List */
+#firmware-list {
+  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Firmware Details */
+.firmware-details {
+  flex: 1;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 2rem;
+  border-radius: 20px;
+  border: 1px solid #00cc00;
+}
+
+.firmware-details h2 {
+  margin: 0;
+}
+
+/* Buttons */
+.download-button {
+  margin: 0.5rem;
+  cursor: pointer;
+  align-self: center;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  color: #00dd00;
+  background-color: #303134;
+  border: 2px solid #00dd00;
+  transition: background-color 0.3s;
+}
+
+.download-button:hover {
+  background-color: #292a2c;
+}
+
+/* Overlay */
+.overlay {
+  z-index: 1;
+  display: none;
+  padding: 1rem;
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+  background: rgba(0, 180, 0, 0.7);
+  transition: background 0.3s;
+}
+
+.overlay:hover {
+  text-decoration: underline;
+  background: rgba(0, 100, 0, 0.9);
+}
+
+/* Version Div */
 .version-div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    text-align: right;
+  text-align: right;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Firmware Card */
+.firmware-card {
+  padding: 2rem;
+  flex-wrap: wrap;
+  display: flex;
+  border-radius: 20px;
+  word-break: break-word;
+  align-items: center;
+  justify-content: center;
+  border: 5px dotted #00cc00;
+  background-color: rgba(32, 33, 36, 0.75);
+}
+
+.firmware-card img {
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  border: 1px solid #00cc00;
+}
+
+/* Responsive Design */
 @media (max-width: 1205px) {
-    .container {
-        max-width: 100%;
-        padding: 0 5px;
-    }
-    
-    #firmware-list {
-        grid-template-columns: auto auto;
-        gap: 5px;
-    }
-    
+  .container {
+    padding: 0 0.5rem;
+    max-width: 100%;
+  }
+
+  #firmware-list {
+    gap: 0.5rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 700px) {
-    .container {
-        max-width: 100%;
-        padding: 0 5px;
-    }
-    
-    #firmware-list {
-        grid-template-columns: auto;
-        gap: 15px;
-    }
-    
-}
+  .container {
+    padding: 0 0.5rem;
+    max-width: 100%;
+  }
 
-.latestVersionText {
-    color: #00dd00;
-    font-weight: bold;
-    font-size: small;
+  #firmware-list {
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
 }
