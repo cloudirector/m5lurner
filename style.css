@@ -39,6 +39,7 @@ h3 {
     border-color: #00dd00;
     cursor: pointer;
     margin: 5px;
+    align-self: center;
 }
 
 .download-button:hover {
@@ -158,10 +159,13 @@ a:hover {
 }
 
 .version-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     text-align: right;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1205px) {
     .container {
         max-width: 100%;
         padding: 0 5px;
@@ -174,7 +178,7 @@ a:hover {
     
 }
 
-@media (max-width: 650px) {
+@media (max-width: 700px) {
     .container {
         max-width: 100%;
         padding: 0 5px;
