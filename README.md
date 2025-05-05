@@ -1,5 +1,5 @@
 # m5lurner
-> Pulled from a wayback archive on [bmorcelli's](https://github.com/bmorcelli/) github page
+> Pulled from a wayback archive of [bmorcelli's](https://github.com/bmorcelli/) github web page
 
 [Source link (dead)](https://bmorcelli.github.io/M5Stick-Launcher/m5lurner.html)
 
