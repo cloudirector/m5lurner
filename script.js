@@ -1,66 +1,62 @@
+// Fetch firmware data from external JSON source
 async function fetchFirmwareData() {
     try {
-        const response = await fetch(
-            'https://raw.githubusercontent.com/bmorcelli/M5Stack-json-fw/main/script/all_device_firmware.json'
-        );
-        const data = await response.json();
-        return data;
-    } catch (err) {
-        return
+        const response = await fetch('https://raw.githubusercontent.com/bmorcelli/M5Stack-json-fw/main/script/all_device_firmware.json');
+        return await response.json();
+    } catch (error) {
+        console.error('Failed to fetch firmware data:', error);
+        return null;
     }
 }
 
+// Create a firmware card element
 function createFirmwareCard(firmware) {
-    // create card div and add class for style
     const card = document.createElement('div');
-    card.classList.add('firmware-card');
+    card.className = 'firmware-card';
 
-    // create image
     const image = document.createElement('img');
-    image.loading = "lazy"; // Load images lazily
-    image.src =
-        `https://m5burner-cdn.m5stack.com/cover/${firmware.cover}`;
+    image.loading = 'lazy';
+    image.src = `https://m5burner-cdn.m5stack.com/cover/${firmware.cover}`;
     card.appendChild(image);
 
-    const newLine = document.createElement('div');
-    newLine.classList.add('newLine');
-    card.appendChild(newLine);
+    card.appendChild(Object.assign(document.createElement('div'), { className: 'newLine' }));
 
-    // details
     const details = document.createElement('div');
-    details.classList.add('firmware-details');
+    details.className = 'firmware-details';
 
-    // title
-    const name = document.createElement('h2');
-    name.textContent = `${firmware.name} (${firmware.author})`;
-    details.appendChild(name);
+    const title = document.createElement('h2');
+    title.textContent = `${firmware.name} (${firmware.author})`;
+    details.appendChild(title);
 
     const description = document.createElement('p');
-    description.classList.add('description');
+    description.className = 'description';
     description.textContent = firmware.description;
     details.appendChild(description);
 
     const overlay = document.createElement('div');
-    overlay.classList.add('overlay');
+    overlay.className = 'overlay';
     overlay.textContent = 'Read more';
     details.appendChild(overlay);
 
     card.appendChild(details);
 
     const versionDiv = document.createElement('div');
-    versionDiv.classList.add('version-div');
+    versionDiv.className = 'version-div';
 
-    // Latest Version Text
-    const latestVersion = firmware.versions.reduce((latest, version) => {
-        return new Date(version.published_at) > new Date(latest.published_at) ? version : latest;
-    });
+    // Get the latest version
+    const latestVersion = firmware.versions.reduce((latest, current) =>
+        new Date(current.published_at) > new Date(latest.published_at) ? current : latest
+    );
+
     const latestVersionText = document.createElement('p');
-    latestVersionText.classList.add('latestVersionText');
+    latestVersionText.className = 'latestVersionText';
     latestVersionText.textContent = `Latest Version: ${latestVersion.version} (${new Date(latestVersion.published_at).toLocaleDateString()})`;
     versionDiv.appendChild(latestVersionText);
 
+    // Create version selector
     const versionSelect = document.createElement('select');
-    versionSelect.classList.add('version-select');
+    versionSelect.className = 'version-select';
+
     firmware.versions.forEach(version => {
         const option = document.createElement('option');
         option.value = version.file;
@@ -69,38 +65,36 @@ function createFirmwareCard(firmware) {
     });
     versionDiv.appendChild(versionSelect);
 
-    // Check if description is longer than allowed height
-    setTimeout(() => {
-        if (description.scrollHeight > description.clientHeight) {
-            overlay.style.display = 'inline-block';
-
-            overlay.addEventListener('click', () => {
-                description.classList.toggle('expanded');
-                overlay.textContent = description.classList.contains('expanded') ? 'Contract' :
-                    'Read more';
-            });
-        }
-    }, 100);
-
+    // Firmware download link
     const downloadLink = document.createElement('a');
-    downloadLink.href =
-        `https://m5burner-cdn.m5stack.com/firmware/${firmware.versions[0].file}`;
-    downloadLink.target = "_blank";
-    downloadLink.textContent = "Download Firmware";
-    downloadLink.classList.add('download-button');
+    downloadLink.href = `https://m5burner-cdn.m5stack.com/firmware/${firmware.versions[0].file}`;
+    downloadLink.target = '_blank';
+    downloadLink.className = 'download-button';
+    downloadLink.textContent = 'Download Firmware';
     versionDiv.appendChild(downloadLink);
 
+    // Update download link on version change
     versionSelect.addEventListener('change', () => {
-        downloadLink.href =
-            `https://m5burner-cdn.m5stack.com/firmware/${versionSelect.value}`;
+        downloadLink.href = `https://m5burner-cdn.m5stack.com/firmware/${versionSelect.value}`;
     });
 
     details.appendChild(versionDiv);
 
+    // Add overlay toggle if description overflows
+    setTimeout(() => {
+        if (description.scrollHeight > description.clientHeight) {
+            overlay.style.display = 'inline-block';
+            overlay.addEventListener('click', () => {
+                description.classList.toggle('expanded');
+                overlay.textContent = description.classList.contains('expanded') ? 'Contract' : 'Read more';
+            });
+        }
+    }, 100);
 
     return card;
 }
 
+// Populate dropdown with unique categories
 function populateCategoryFilter(categories) {
     const filter = document.getElementById('category-filter');
     categories.forEach(category => {
@@ -111,37 +105,38 @@ function populateCategoryFilter(categories) {
     });
 }
 
-function filterFirmwareByCategory(firmwareData, category) {
-    if (category === 'all') {
-        return firmwareData;
-    }
-    return firmwareData.filter(firmware => firmware.category === category);
+// Filter firmware list by category
+function filterFirmwareByCategory(firmwares, selectedCategory) {
+    return selectedCategory === 'all'
+        ? firmwares
+        : firmwares.filter(firmware => firmware.category === selectedCategory);
 }
 
-function displayFirmwareList(firmwareData) {
+// Render firmware cards in the UI
+function displayFirmwareList(firmwares) {
     const list = document.getElementById('firmware-list');
     list.innerHTML = '';
-    firmwareData.forEach(firmware => {
-        const card = createFirmwareCard(firmware);
-        list.appendChild(card);
-    });
+    firmwares.forEach(firmware => list.appendChild(createFirmwareCard(firmware)));
 }
 
+// Initialize application
 async function init() {
     const firmwareData = await fetchFirmwareData();
-    if (firmwareData) {
-        const categories = [...new Set(firmwareData.map(firmware => firmware.category))];
-        populateCategoryFilter(categories);
-    
-        document.getElementById('category-filter').addEventListener('change', (event) => {
-            const filteredData = filterFirmwareByCategory(firmwareData, event.target.value);
-            displayFirmwareList(filteredData);
-        });
-    
-        displayFirmwareList(firmwareData);
-    } else {
-        alert("Error retrieving firmware list.");
+
+    if (!firmwareData) {
+        alert('Error retrieving firmware list.');
+        return;
     }
+
+    const categories = Array.from(new Set(firmwareData.map(fw => fw.category)));
+    populateCategoryFilter(categories);
+
+    document.getElementById('category-filter').addEventListener('change', event => {
+        const filtered = filterFirmwareByCategory(firmwareData, event.target.value);
+        displayFirmwareList(filtered);
+    });
+
+    displayFirmwareList(firmwareData);
 }
 
 init();
