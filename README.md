@@ -13,6 +13,9 @@
 
 ## Todo
 - [ ] Redesign with tailwind
+- [ ] Better loading
+- [ ] More firmware info / creator info
+- [ ] Better filter
 - [x] Deploy to github pages. [Link](https://cloudirector.is-a.dev/m5lurner/)
 - [ ] Mirror [bmorcelli/M5Stack-json-fw](https://github.com/bmorcelli/M5Stack-json-fw)
 - [ ] Pull-request [m5launcher](https://github.com/bmorcelli/Launcher) to use this link
