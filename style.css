@@ -99,6 +99,7 @@ a:hover {
     flex: 1;
     padding: 20px;
     position: relative;
+    text-align: center;
 }
 
 .firmware-details h2 {
