@@ -21,6 +21,7 @@ body {
     max-width: 80%;
     margin: 5px auto;
     padding: 0 5px;
+    max-width: 80%;
 }
 
 h3 {
@@ -78,7 +79,7 @@ a:hover {
     align-items: center;
     word-break: break-word;
     position: relative;
-    background-color: #202124;
+    background-color: #202124bf;
     border: 5px solid #00cc00;
     border-style: dotted;
     border-radius: 20px;
@@ -159,22 +160,30 @@ a:hover {
     text-align: right;
 }
 
-@media (max-width: 768px) {
-    .firmware-card {
-        flex-direction: column;
-        align-items: flex-start;
+@media (max-width: 1000px) {
+    .container {
+        max-width: 100%;
+        padding: 0 5px;
     }
+    
+    #firmware-list {
+        grid-template-columns: auto auto;
+        gap: 5px;
+    }
+    
+}
 
-    .firmware-card img {
-        width: 100%;
-        height: auto;
-        margin: 16px 0;
+@media (max-width: 650px) {
+    .container {
+        max-width: 100%;
+        padding: 0 5px;
     }
-
-    .version-select {
-        width: 10ch;
-        /* Maintain the width for mobile */
+    
+    #firmware-list {
+        grid-template-columns: auto;
+        gap: 15px;
     }
+    
 }
 
 .latestVersionText {
