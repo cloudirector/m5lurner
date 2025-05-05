@@ -1,0 +1,184 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 5px;
+    color: #00dd00;
+    background-color: #202124;
+}
+
+#backgroundCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100vh;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 80%;
+    margin: 5px auto;
+    padding: 0 5px;
+}
+
+h3 {
+    margin: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #00cc00;
+}
+
+.download-button {
+    background-color: #303134;
+    color: #00dd00;
+    border: 2px solid;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border-color: #00dd00;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.download-button:hover {
+    background-color: #292a2c;
+}
+
+a {
+    color: #e0d204;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.newLine {
+    flex-basis: 100%;
+    height: 0;
+  }
+
+.categoryFilter {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#firmware-list {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 20px;
+}
+
+.firmware-card {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    word-break: break-word;
+    position: relative;
+    background-color: #202124;
+    border: 5px solid #00cc00;
+    border-style: dotted;
+    border-radius: 20px;
+}
+
+.firmware-card img {
+    height: 250px;
+    width: 250px;
+    border: 1px solid #00cc00;
+    border-radius: 20px;
+}
+
+.firmware-details {
+    border: 1px solid #00cc00;
+    border-radius: 20px;
+    margin-top: 20px;
+    flex: 1;
+    padding: 20px;
+    position: relative;
+}
+
+.firmware-details h2 {
+    margin: 0;
+}
+
+.description {
+    overflow: hidden;
+    display: -webkit-box;
+    text-align: justify;
+    -webkit-line-clamp: 10;
+    /* Limit to 10 lines */
+    -webkit-box-orient: vertical;
+    max-height: 15em;
+    /* Adjust according to line height */
+    position: relative;
+}
+
+.description.expanded {
+    -webkit-line-clamp: unset;
+    /* Remove line clamp */
+    max-height: none;
+    /* Remove max height */
+}
+
+.overlay {
+    display: none;
+    padding: 10px;
+    border-radius: 10px;
+    /* Adjust according to line height */
+    background: rgba(000, 180, 000, 0.7);
+    text-align: center;
+    color: white;
+    text-decoration: bold;
+    cursor: pointer;
+    /* Vertically center the text */
+    transition: background 0.3s;
+    z-index: 1;
+    /* Ensure overlay is on top */
+}
+
+.overlay:hover {
+    background: rgba(000, 100, 000, 0.9);
+    text-decoration: underline;
+}
+
+.version-select {
+    margin: 8px 0;
+    width: 10ch;
+    /* Approximate width for 10 characters */
+}
+
+.version-select option {
+    max-width: 10ch;
+    /* Limit the display width */
+}
+
+.version-div {
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .firmware-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .firmware-card img {
+        width: 100%;
+        height: auto;
+        margin: 16px 0;
+    }
+
+    .version-select {
+        width: 10ch;
+        /* Maintain the width for mobile */
+    }
+}
+
+.latestVersionText {
+    color: #00dd00;
+    font-weight: bold;
+    font-size: small;
+}
