@@ -1,9 +1,13 @@
 async function fetchFirmwareData() {
-    const response = await fetch(
-        'https://raw.githubusercontent.com/bmorcelli/M5Stack-json-fw/main/script/all_device_firmware.json'
+    try {
+        const response = await fetch(
+            'https://raw.githubusercontent.com/bmorcelli/M5Stack-json-fw/main/script/all_device_firmware.json'
         );
-    const data = await response.json();
-    return data;
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        return
+    }
 }
 
 function createFirmwareCard(firmware) {
@@ -125,15 +129,19 @@ function displayFirmwareList(firmwareData) {
 
 async function init() {
     const firmwareData = await fetchFirmwareData();
-    const categories = [...new Set(firmwareData.map(firmware => firmware.category))];
-    populateCategoryFilter(categories);
-
-    document.getElementById('category-filter').addEventListener('change', (event) => {
-        const filteredData = filterFirmwareByCategory(firmwareData, event.target.value);
-        displayFirmwareList(filteredData);
-    });
-
-    displayFirmwareList(firmwareData);
+    if (firmwareData) {
+        const categories = [...new Set(firmwareData.map(firmware => firmware.category))];
+        populateCategoryFilter(categories);
+    
+        document.getElementById('category-filter').addEventListener('change', (event) => {
+            const filteredData = filterFirmwareByCategory(firmwareData, event.target.value);
+            displayFirmwareList(filteredData);
+        });
+    
+        displayFirmwareList(firmwareData);
+    } else {
+        alert("Error retrieving firmware list.");
+    }
 }
 
 init();
