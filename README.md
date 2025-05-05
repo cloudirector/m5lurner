@@ -13,6 +13,7 @@
 
 ## Todo
 - [ ] Redesign with tailwind
+- [ ] Mobile View
 - [ ] Better loading
 - [ ] More firmware info / creator info
 - [ ] Better filter
